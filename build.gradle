@@ -24,8 +24,17 @@ dependencies {
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'net.jqwik:jqwik:1.7.3'
+	testImplementation 'org.junit.jupiter:junit-jupiter:5.9.2'
+	testImplementation 'org.assertj:assertj-core:3.23.1'
+	compileOnly('org.jetbrains:annotations:23.0.0')
 }
 
 tasks.named('test') {
-	useJUnitPlatform()
+	useJUnitPlatform {
+		includeEngines 'jqwik'
+	}
+	include '**/*Properties.class'
+	include '**/*Test.class'
+	include '**/*Tests.class'
 }
